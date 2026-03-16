@@ -1,0 +1,9 @@
+{
+  "//": "Example MobSF AI configuration. Copy this file to MOBSF_HOME/ai_config.json and edit.",
+  "provider": "openai_compatible",
+  "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+  "api_key": "sk-f38e710f9f09418db22f1cb34cdb351a",
+  "model": "qwen-plus",
+  "timeout": 120
+}
+

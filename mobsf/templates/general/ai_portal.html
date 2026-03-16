@@ -1,0 +1,217 @@
+{% load static %}
+
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>{{ title }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="{% static "img/favicon.ico" %}">
+
+  <link rel="stylesheet" href="{% static "adminlte/plugins/fontawesome-free/css/all.min.css" %}">
+  <link rel="stylesheet" href="{% static "adminlte/dashboard/css/adminlte.min.css" %}">
+  <link rel="stylesheet" href="{% static "adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css" %}">
+  <link rel="stylesheet" href="{% static "others/css/ai_portal_modern.css" %}">
+</head>
+
+<body class="hold-transition layout-top-nav ai-portal">
+<div class="wrapper">
+  <nav class="main-header navbar navbar-expand navbar-dark navbar-primary">
+    <div class="container">
+      <a class="navbar-brand" href="/ai/">
+        <span id="ai-nav-title" class="ai-brand">
+          <img
+            id="ai-brand-logo"
+            src="{% static 'img/psbc_logo.svg' %}"
+            alt="中国邮政储蓄银行"
+            onerror="this.style.display='none'"
+          />
+          <span class="ai-brand-stack">
+            <span id="ai-brand-org" class="ai-brand-org">中国邮政储蓄银行</span>
+            <span class="ai-brand-main">
+              <strong id="ai-brand-text">SAST</strong>
+              <span id="ai-brand-suffix">AI</span>
+            </span>
+          </span>
+        </span>
+      </a>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item d-none d-md-inline-block">
+          <button class="btn btn-sm btn-outline-light mr-2 ai-nav-btn" id="ai-toggle-lang" type="button"></button>
+        </li>
+        <li class="nav-item d-none d-md-inline-block">
+          <button class="btn btn-sm btn-outline-light ai-nav-btn" id="ai-toggle-theme" type="button">
+            <i class="fas fa-moon" id="ai-theme-icon"></i>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="content-wrapper">
+    <section class="content">
+      <div class="container">
+        <div class="row ai-portal-main-row align-items-stretch">
+          <div class="col-12 col-md-4 col-lg-3 ai-portal-sidebar">
+            <div class="card card-outline card-secondary h-100">
+              <div class="card-header">
+                <h3 class="card-title" id="ai-recent-title"><i class="fas fa-stream"></i> 最近任务</h3>
+                <div class="card-tools">
+                  <button class="btn btn-tool" id="ai-btn-refresh-tasks"><i class="fas fa-sync"></i></button>
+                </div>
+              </div>
+              <div class="card-body p-0 d-flex flex-column flex-grow-1">
+                <div class="ai-task-list flex-grow-1" id="ai-task-list">
+                  <div class="p-3 text-muted" id="ai-task-empty">暂无任务。</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-8 col-lg-9">
+            <div class="card card-outline card-primary h-100">
+              <div class="card-header">
+                <h3 class="card-title" id="ai-upload-title"><i class="fas fa-upload"></i> 上传与分析</h3>
+              </div>
+              <div class="card-body">
+                <div class="form-group mb-2 ai-upload-left">
+                  <label for="ai-file" id="ai-label-file">应用文件</label>
+                  <input type="file" class="d-none" id="ai-file" />
+                  <div id="ai-dropzone" class="ai-dropzone" role="button" tabindex="0">
+                    <div class="ai-dropzone-inner">
+                      <div class="ai-dropzone-icon"><i class="fas fa-cloud-arrow-up"></i></div>
+                      <div class="ai-dropzone-title" id="ai-drop-title">拖拽文件到这里</div>
+                      <div class="ai-dropzone-sub" id="ai-drop-sub">或点击选择文件</div>
+                      <div class="ai-dropzone-file text-muted small" id="ai-file-name">未选择文件</div>
+                    </div>
+                  </div>
+                  <small class="text-muted d-block mt-2" id="ai-file-support">支持：APK / APKS / XAPK / AAB / JAR / AAR / SO / IPA / DYLIB / A / ZIP / APPX</small>
+                </div>
+
+                <hr />
+
+                <div class="text-muted small mb-2" id="ai-status"></div>
+                <div class="ai-main-progress mb-2">
+                  <div class="mb-2 d-flex align-items-center justify-content-between">
+                    <div class="text-muted small" id="ai-main-meta">待命。</div>
+                    <div class="text-muted small" id="ai-main-pct">0%</div>
+                  </div>
+                  <div class="progress ai-progress ai-scan-progress ai-progress-full">
+                    <div class="progress-bar" role="progressbar" style="width:0%" id="ai-main-progress"></div>
+                  </div>
+                </div>
+                <div class="ai-log-toggle mb-2">
+                  <a class="small" data-toggle="collapse" href="#ai-log-collapse" role="button" aria-expanded="false" aria-controls="ai-log-collapse" id="ai-log-toggle">
+                    查看日志
+                  </a>
+                </div>
+                <div class="collapse mb-2" id="ai-log-collapse">
+                  <pre class="ai-result" id="ai-scan-logs">暂无日志。</pre>
+                </div>
+
+                <div class="row ai-md5-action-row mb-2" id="ai-md5-row">
+                  <div class="col-6">
+                    <div class="form-group mb-0">
+                      <label for="ai-hash" id="ai-label-md5">MD5（任务标识）</label>
+                      <input class="form-control ai-hash-input" id="ai-hash" placeholder="上传后自动填充（或粘贴已有的 MD5）" />
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-group mb-0">
+                      <label class="d-none d-md-block">&nbsp;</label>
+                      <button class="btn btn-primary btn-block ai-upload-btn" id="ai-btn-upload"></button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="btn-group w-100 mb-2" role="group">
+                  <button class="btn btn-outline-secondary" id="ai-btn-open-report" disabled></button>
+                </div>
+
+                <div class="btn-group w-100 mb-2" role="group">
+                  <button class="btn btn-outline-info" id="ai-btn-download-binary" disabled></button>
+                  <button class="btn btn-outline-danger" id="ai-btn-download-pdf" disabled></button>
+                </div>
+
+                <div class="form-group">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <label for="ai-prompt" id="ai-label-prompt" class="mb-0">AI 分析目标（可选）</label>
+                    <button
+                      class="btn btn-sm btn-outline-secondary"
+                      type="button"
+                      id="ai-prompt-toggle"
+                      data-toggle="collapse"
+                      data-target="#ai-prompt-collapse"
+                      aria-expanded="false"
+                      aria-controls="ai-prompt-collapse"
+                    >
+                      展开
+                    </button>
+                  </div>
+                  <div class="collapse mt-2" id="ai-prompt-collapse">
+                    <textarea class="form-control" id="ai-prompt" rows="4" placeholder="例如：按可利用性优先级排序，并给出修复建议与验证步骤。"></textarea>
+                  </div>
+                </div>
+
+                <div class="btn-group w-100" role="group">
+                  <div class="w-100 d-flex flex-column ai-analyze-stack">
+                    <button class="btn btn-success" id="ai-btn-analyze" disabled></button>
+                  </div>
+                </div>
+
+                <hr />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="card card-outline card-success">
+              <div class="card-header">
+                <h3 class="card-title" id="ai-result-title"><i class="fas fa-brain"></i> AI 分析结果</h3>
+                <div class="card-tools">
+                  <button class="btn btn-tool" id="ai-btn-download-ai" disabled title="下载 AI 报告">
+                    <i class="fas fa-download"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="ai-result-meta text-muted small mb-2" id="ai-result-meta"></div>
+                <div class="ai-result" id="ai-result">暂无 AI 结果。</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="main-footer">
+    <div class="container">
+      <strong id="ai-footer-title">
+        <img
+          src="{% static 'img/psbc_logo.svg' %}"
+          class="ai-footer-logo"
+          alt="中国邮政储蓄银行"
+          onerror="this.style.display='none'"
+        />
+        <span id="ai-footer-text">SAST AI</span>
+        <span class="text-muted small ml-2" id="ai-footer-copy">© {% now "Y" %} SAST AI. 保留所有权利。</span>
+      </strong>
+      <div class="float-right d-none d-sm-inline-block"><b id="ai-footer-version-label">Version</b> v1.0.0</div>
+    </div>
+  </footer>
+</div>
+
+<script src="{% static "adminlte/plugins/jquery.min.js" %}"></script>
+<script src="{% static "adminlte/plugins/bootstrap/bootstrap.bundle.min.js" %}"></script>
+<script src="{% static "adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js" %}"></script>
+<script src="{% static "adminlte/dashboard/js/adminlte.min.js" %}"></script>
+<script>
+  window.__AI_PORTAL__ = { csrfToken: "{{ csrf_token }}", noIconUrl: "{% static 'img/no_icon.png' %}" };
+</script>
+<script src="{% static "others/js/ai_portal_modern.js" %}?v=5"></script>
+</body>
+</html>
+

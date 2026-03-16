@@ -1,0 +1,112 @@
+/* SAST theme overrides for AdminLTE sidebar pages (static_analyzer, etc.) */
+:root {
+  --sast-bg0: #05060a;
+  --sast-bg1: #070b14;
+  --sast-card: rgba(15, 23, 42, 0.55);
+  --sast-stroke: rgba(148, 163, 184, 0.16);
+  --sast-text: rgba(226, 232, 240, 0.92);
+  --sast-muted: rgba(148, 163, 184, 0.86);
+  --sast-accent: #4f46e5;
+  --sast-accent2: #06b6d4;
+}
+
+/* Sidebar container */
+body .main-sidebar.sidebar-dark-primary,
+body .main-sidebar {
+  background:
+    radial-gradient(900px 520px at 20% -10%, rgba(79, 70, 229, 0.35), transparent 55%),
+    radial-gradient(900px 520px at 120% 0%, rgba(6, 182, 212, 0.22), transparent 55%),
+    linear-gradient(180deg, var(--sast-bg0) 0%, var(--sast-bg1) 100%) !important;
+  border-right: 1px solid var(--sast-stroke) !important;
+  box-shadow: 18px 0 42px rgba(0, 0, 0, 0.35);
+}
+
+/* Ensure the inner sidebar area matches (AdminLTE uses .sidebar) */
+body .main-sidebar .sidebar {
+  background: transparent !important;
+}
+
+/* Brand block */
+body .main-sidebar .brand-link {
+  background: rgba(2, 6, 23, 0.35) !important;
+  border-bottom: 1px solid var(--sast-stroke) !important;
+  backdrop-filter: blur(10px);
+}
+body .main-sidebar .brand-link .brand-text {
+  color: var(--sast-text) !important;
+  letter-spacing: 0.3px;
+}
+body .main-sidebar .brand-link .brand-image {
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 3px;
+}
+
+/* Nav items (AdminLTE commonly uses .nav-pills) */
+body .main-sidebar .nav-sidebar .nav-link,
+body .main-sidebar .nav-pills .nav-link {
+  color: var(--sast-muted) !important;
+  border-radius: 12px !important;
+  margin: 6px 10px !important;
+  padding: 10px 12px;
+  transition: background-color 160ms ease, color 160ms ease, box-shadow 160ms ease;
+  border: 1px solid transparent !important;
+}
+body .main-sidebar .nav-sidebar .nav-link .nav-icon,
+body .main-sidebar .nav-pills .nav-link .nav-icon {
+  color: rgba(226, 232, 240, 0.72) !important;
+}
+body .main-sidebar .nav-sidebar .nav-link:hover,
+body .main-sidebar .nav-pills .nav-link:hover {
+  background: rgba(15, 23, 42, 0.46) !important;
+  border-color: rgba(79, 70, 229, 0.22) !important;
+  box-shadow:
+    0 0 0 1px rgba(148, 163, 184, 0.10) inset,
+    0 10px 18px rgba(0, 0, 0, 0.20);
+  color: rgba(226, 232, 240, 0.96) !important;
+}
+
+/* Active item */
+body .main-sidebar .nav-sidebar .nav-link.active,
+body .main-sidebar .nav-pills .nav-link.active,
+body .main-sidebar .nav-sidebar .nav-item.menu-open > .nav-link,
+body .main-sidebar .nav-pills .nav-item.menu-open > .nav-link {
+  background: linear-gradient(90deg, rgba(79, 70, 229, 0.40), rgba(6, 182, 212, 0.20)) !important;
+  color: rgba(226, 232, 240, 0.98) !important;
+  border-color: rgba(148, 163, 184, 0.18) !important;
+  box-shadow:
+    0 10px 22px rgba(0, 0, 0, 0.26),
+    0 0 0 1px rgba(148, 163, 184, 0.18) inset;
+}
+body .main-sidebar .nav-sidebar .nav-link.active .nav-icon,
+body .main-sidebar .nav-pills .nav-link.active .nav-icon,
+body .main-sidebar .nav-sidebar .nav-item.menu-open > .nav-link .nav-icon,
+body .main-sidebar .nav-pills .nav-item.menu-open > .nav-link .nav-icon {
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+
+/* Treeview indicators */
+body .main-sidebar .nav-sidebar .nav-link .right,
+body .main-sidebar .nav-sidebar .nav-link .fas.fa-angle-left {
+  color: rgba(148, 163, 184, 0.70) !important;
+}
+
+/* Section headers / small text */
+body .main-sidebar .nav-header {
+  color: rgba(226, 232, 240, 0.70) !important;
+  letter-spacing: 0.6px;
+  margin: 12px 14px 6px;
+}
+
+/* Sidebar scrollbar (OverlayScrollbars / native) */
+body .sidebar::-webkit-scrollbar {
+  width: 10px;
+}
+body .sidebar::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.20);
+  border-radius: 999px;
+}
+body .sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.28);
+}
+

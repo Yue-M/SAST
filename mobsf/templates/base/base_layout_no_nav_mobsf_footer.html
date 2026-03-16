@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>{{title}}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Mobile Security Framework - MobSF">
+  <meta name="author" content="Ajin Abraham">
+  <link rel="icon" href="{% static "img/favicon.ico" %}">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static "adminlte/plugins/fontawesome-free/css/all.min.css" %}">
+  <link rel="stylesheet" href="{% static "adminlte/dashboard/css/adminlte.min.css" %}">
+  <link rel="stylesheet" href="{% static "adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css" %}">
+  <link rel="stylesheet" href="{% static "others/css/sast_sidebar.css" %}?v=1">
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <style>
+    body { zoom: 0.8; }
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1040;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+  </style>
+  {% block extra_css %}{% endblock %}
+</head>
+<body class="hold-transition {% block sidebar_option %}{% endblock %} layout-fixed">
+<div class="wrapper">
+  <!-- No top navbar -->
+
+  <!-- sidebar-->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    {% block sidebar_brand %}
+      <a href="{% url 'home' %}" class="brand-link">
+        <img src="{% static "img/mobsf_icon.png" %}" alt="MobSF" class="brand-image" style="opacity: .8">
+        <span class="brand-text logo-lg"> | <strong> Mob</strong>SF</span>
+      </a>
+    {% endblock %}
+    {% block sidebar %}{% endblock %}
+  </aside>
+
+  {% block content %}{% endblock %}
+
+  <footer class="main-footer">
+    {% if not portal_only %}
+      <strong>© {% now "Y" %} Mobile Security Framework - MobSF | <a href="https://ajinabraham.com">Ajin Abraham</a> | <a href="https://opensecurity.in">OpenSecurity</a>.</strong>
+      <div class="float-right d-none d-sm-inline-block">
+        <b>Version</b> {{ version }}
+      </div>
+    {% endif %}
+  </footer>
+
+  <aside class="control-sidebar control-sidebar-dark"></aside>
+</div>
+
+<div class="modal fade scan-logs-mdl" tabindex="-1" role="dialog" aria-labelledby="scan-logs-mdl-label" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+  <div class="modal-content">
+    {% block scan_logs %}{% endblock %}
+  </div>
+  </div>
+</div>
+
+<script src="{% static "adminlte/plugins/jquery.min.js" %}"></script>
+<script src="{% static "adminlte/plugins/jquery-ui.min.js" %}"></script>
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+  window.alert = (function() {
+    var nativeAlert = window.alert;
+    return function(message) {
+        window.alert = nativeAlert;
+        message.indexOf("DataTables warning") === 0 ?
+            console.warn(message) :
+            nativeAlert(message);
+    }
+  })();
+</script>
+<script src="{% static "adminlte/plugins/bootstrap/bootstrap.bundle.min.js" %}"></script>
+<script src="{% static "adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js" %}"></script>
+<script src="{% static "adminlte/dashboard/js/adminlte.min.js" %}"></script>
+<script src="{% static "others/js/static_analyzer_i18n.js" %}"></script>
+{% block extra_scripts %}{% endblock %}
+</body>
+</html>
+
