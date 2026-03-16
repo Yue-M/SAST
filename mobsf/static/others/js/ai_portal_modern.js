@@ -792,7 +792,7 @@
     const r = await postForm("/ai/status/", { hash });
     if (!r.ok) return;
     const logs = Array.isArray(r.json.logs) ? r.json.logs : [];
-    const last = r.json.last || {};
+    const last = r.json.last || (logs.length ? logs[logs.length - 1] : {}) || {};
     const lastMsg = (last.status || "").toString();
     const lastTsRaw = (last.timestamp || "").toString();
     const lastTs = lastTsRaw ? formatLocalTimestamp(lastTsRaw) : "";

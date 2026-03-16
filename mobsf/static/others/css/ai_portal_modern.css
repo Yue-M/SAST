@@ -28,6 +28,18 @@ body.ai-portal {
   max-width: 1180px;
 }
 
+/* Subtle global typography polish */
+body.ai-portal .text-muted {
+  color: rgba(226, 232, 240, 0.68) !important;
+}
+body.ai-portal label {
+  color: rgba(226, 232, 240, 0.86);
+  font-weight: 600;
+}
+body.ai-portal hr {
+  border-color: rgba(148, 163, 184, 0.12);
+}
+
 .ai-brand {
   display: inline-flex;
   align-items: center;
@@ -79,6 +91,12 @@ body.ai-portal {
   border-color: rgba(248, 250, 252, 0.38) !important;
 }
 
+/* Slightly taller, cleaner navbar */
+body.ai-portal .main-header.navbar {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
 .content-wrapper {
   background: transparent !important;
 }
@@ -111,6 +129,20 @@ body.ai-portal {
 .card.card-outline > * {
   position: relative;
 }
+
+/* Card header spacing */
+body.ai-portal .card-header {
+  padding: 0.85rem 1rem;
+}
+body.ai-portal .card-body {
+  padding: 1rem;
+}
+body.ai-portal .card-header .btn.btn-tool {
+  color: rgba(248, 250, 252, 0.78) !important;
+}
+body.ai-portal .card-header .btn.btn-tool:hover {
+  color: rgba(248, 250, 252, 0.95) !important;
+}
 .card-header {
   border-bottom: 1px solid rgba(148,163,184,0.12) !important;
 }
@@ -127,6 +159,19 @@ body.ai-portal {
 .ai-task-list {
   max-height: 74vh;
   overflow: auto;
+}
+
+/* Sidebar scrollbars cleaner */
+.ai-task-list::-webkit-scrollbar {
+  width: 10px;
+}
+.ai-task-list::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.22);
+  border-radius: 999px;
+  border: 2px solid rgba(2, 6, 23, 0.0);
+}
+.ai-task-list::-webkit-scrollbar-track {
+  background: transparent;
 }
 .ai-task-item {
   display: flex;
@@ -160,17 +205,47 @@ body.ai-portal {
   background: linear-gradient(135deg, rgba(37,99,235,0.22), rgba(20,184,166,0.10));
   border-color: rgba(56,189,248,0.28);
 }
-.ai-task-icon {
+/* Task icon is rendered as an <img> */
+img.ai-task-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  object-fit: cover;
+  background: rgba(148,163,184,0.14);
+  border: 1px solid rgba(148,163,184,0.14);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.22);
+  flex: 0 0 auto;
+}
+
+/* Delete icon button in task row */
+.ai-task-del {
   width: 34px;
   height: 34px;
-  border-radius: 8px;
-  background: rgba(148,163,184,0.14);
+  border-radius: 12px;
+  border: 1px solid rgba(148,163,184,0.16);
+  background: rgba(2,6,23,0.18);
+  color: rgba(226,232,240,0.82);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
 }
-.ai-task-icon img { width: 100%; height: 100%; object-fit: cover; }
+.ai-task-del:hover {
+  background: rgba(239,68,68,0.16);
+  border-color: rgba(239,68,68,0.25);
+  color: rgba(254,226,226,0.92);
+}
+
+/* Task body text */
+.ai-task-body { min-width: 0; }
+.ai-task-title {
+  font-weight: 700;
+  color: rgba(248,250,252,0.92);
+  line-height: 1.2;
+}
+.ai-task-title, .ai-task-meta {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .ai-task-meta {
   display: flex;
   gap: 0.5rem;
@@ -200,6 +275,17 @@ body.ai-portal {
 .ai-dropzone {
   box-shadow: 0 16px 40px rgba(0,0,0,0.30);
 }
+
+/* Dropzone look closer to "card inset" */
+.ai-dropzone {
+  background:
+    radial-gradient(900px 220px at 30% 0%, rgba(56, 189, 248, 0.10), transparent 60%),
+    rgba(2, 6, 23, 0.26);
+}
+body.ai-portal .ai-dropzone .text-muted,
+body.ai-portal #ai-drop-sub {
+  color: rgba(226, 232, 240, 0.78) !important;
+}
 .ai-dropzone:hover {
   border-color: rgba(59,130,246,0.40);
 }
@@ -219,6 +305,12 @@ body.ai-portal {
 .ai-progress.ai-progress-full .progress-bar {
   background: linear-gradient(90deg, rgba(37,99,235,0.95), rgba(20,184,166,0.92), rgba(34,197,94,0.92));
   border-radius: 999px;
+}
+
+/* Make progress info line match screenshot */
+#ai-main-meta, #ai-main-pct {
+  font-weight: 600;
+  color: rgba(226, 232, 240, 0.80) !important;
 }
 
 /* Primary action button more like screenshot */
@@ -247,6 +339,19 @@ body.ai-portal {
   filter: none;
 }
 
+/* Input fields: softer, modern */
+body.ai-portal .form-control {
+  background: rgba(2, 6, 23, 0.24) !important;
+  border-color: rgba(148, 163, 184, 0.18) !important;
+  color: rgba(248, 250, 252, 0.92) !important;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.18) inset;
+}
+body.ai-portal .form-control:focus {
+  border-color: rgba(56, 189, 248, 0.45) !important;
+  box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.10) !important;
+}
+
 /* Split buttons row aesthetics */
 .ai-actions-row .btn,
 .ai-actions-row .btn-group .btn {
@@ -254,6 +359,37 @@ body.ai-portal {
   border-color: rgba(148,163,184,0.16) !important;
   background: rgba(2,6,23,0.22) !important;
   color: rgba(226,232,240,0.90) !important;
+}
+
+/* Ensure paired buttons (Download original / PDF) never overlap */
+.btn-group.w-100 {
+  display: flex;
+}
+.btn-group.w-100 > .btn {
+  flex: 1 1 0%;
+  min-width: 0;
+  white-space: nowrap;
+}
+
+/* Add breathing room between paired buttons (Download original / PDF) */
+.btn-group.w-100.mb-2 {
+  gap: 10px;
+}
+.btn-group.w-100.mb-2 > .btn {
+  border-radius: 12px !important;
+}
+
+/* Prompt collapse toggle button ("展开") should be pill-shaped */
+#ai-prompt-toggle.btn {
+  border-radius: 999px !important;
+  padding: 0.25rem 0.7rem !important;
+  border-color: rgba(148, 163, 184, 0.22) !important;
+  background: rgba(2, 6, 23, 0.20) !important;
+  color: rgba(226, 232, 240, 0.88) !important;
+}
+#ai-prompt-toggle.btn:hover {
+  background: rgba(2, 6, 23, 0.32) !important;
+  border-color: rgba(56, 189, 248, 0.28) !important;
 }
 
 .ai-result {
